@@ -7,7 +7,7 @@ var cheerio = require("cheerio");
 
 // Require all models as db
 var db = require("./models");
-var port = 3000;
+var PORT = 3000;
 
 //Initialize Express as app
 var app = express();
@@ -27,21 +27,45 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true});
 
 //Routes
 //GET route for scraping website
-app.get("/scrap", function (req, res) {
-    axios.get("").then(function (response) {
+app.get("/scrape", function (req, res) {
+    axios.get("https://www.espn.com/").then(function (response) {
         var $ = cheerio.load(response.data);
-
-    })
-})
+        // var results = [];
+        $("div.contentItem__content").each(function(i, element) {
+            var result = {};
+            result.title = $(this)
+            .children("h1")
+            .text();
+            result.summary = $(this)
+            .children("p")
+            .text();
+            result.link = $(this)
+            .children("a")
+            .attr("href");
+            
+        db.Article.create(result)
+            .then(function (dbArticle) {
+          // View the added result in the console
+          console.log(dbArticle);
+        })
+        .catch(function (err) {
+          // If an error occurred, log it
+          console.log(err);
+        });
+        })
+        // console.log("scraping results " + result);
+        res.send("Scrape Complete");
+    });
+});
 
 //Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
     db.Article.find({}).then(function (dbResponse) {
         res.send(dbResponse);
     })
-    .catch(function (err) {
+        .catch(function (err) {
         res.json(err);
-    })
+        })
 });
 
 //Route to grab specific ARticle by id, with populated note

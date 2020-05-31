@@ -19,6 +19,7 @@
   "homepage": "https://github.com/skip1113/Scraping-Mongo#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "bulma": "^0.8.2",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
