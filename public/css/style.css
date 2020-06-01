@@ -1,16 +1,19 @@
 body {
-    background-color: rgb(182, 182, 182);
+    background-color: rgb(211, 211, 211);
     
 }
 .wrapper {
-    width: 960px;
+    width: 1360px;
         padding-top: 35px;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
 }
 .navbar {
-    background-color: indianred;
+    background-image: url(https://unr.s3.amazonaws.com/prod/unr2016/wp-content/uploads/2020/01/29195912/5e2f321f5bc79c157355a246.jpg);
+    background-position: 10% 10%;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-bottom: 1px solid black;
     padding-top: 50px;
     padding-bottom: 40px;
@@ -20,10 +23,11 @@ body {
 }
 .navbar-item1 {
     font-size: 40px;
-    color: black;
+    color: white;
 }
 .navbar-item {
     font-size: 18px;
+    color: wheat;
 }
 .navbar-start {
     margin-right: 100px;
@@ -34,13 +38,33 @@ body {
     text-align: center;
 }
 #news, #saved {
-    width: 40%;
+    width: 45%;
     background-color: antiquewhite;
   }
-  #news { float: left; }
+  #news { 
+      float: left; 
+      margin-right: 10px;
+    }
   #saved { float: right; }
   table, td {
     border-width: 1px;
     border-style: solid;
     border-color: black;
+}
+#title-main {
+    font-size: 43px;
+    font-weight: bold;
+}
+textarea, input {
+    display: block;
+    width: 100%;
+    background-color: #FCF5C7;
+  }
+  input {
+    height: 36px;
+    font-size: 24px;
+  }
+  textarea {
+    height: 200px;
+    font-size: 18px;
   }
