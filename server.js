@@ -81,6 +81,7 @@ app.get("/scrape", function (req, res) {
 app.get("/headlines", function (req, res) {
   // TODO: Finish the route so it grabs all of the articles
   db.Headline.find({}).then(function (dbHeadline) {
+    // console.log(dbHeadline);
     res.json(dbHeadline);
   })
     .catch(function (err) {
@@ -107,6 +108,16 @@ app.get("/headlines/:id", function (req, res) {
   // Finish the route so it finds one article using the req.params.id,
   // and run the populate method with "note",
   // then responds with the article with the note included
+});
+// app.get("/notes/")
+app.put("/notes/:id", function (req, res) {
+  // TODO
+  db.Headline.findOneAndUpdate({_id: req.params.id}, { $unset: { note: 1}}, function (err, results) {
+    res.json(results);
+  });
+
+  
+
 });
 
 // Route for saving/updating an Article's associated Note

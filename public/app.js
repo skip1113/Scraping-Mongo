@@ -7,11 +7,11 @@ $.getJSON("/headlines", function (data) {
 
   }
 });
-$(document).on("click", "#deletenote", deletenote);
-$(document).on("click", ".save", function () {
-  var thisId = $(this).attr("data-id");
+// $(document).on("click", "#deletenote", deletenote);
+// $(document).on("click", ".save", function () {
+//   var thisId = $(this).attr("data-id");
   
-})
+// })
 $(document).on("click", "p", function () {
   // Empty the notes from the note section
   $("#notes").empty();
@@ -27,7 +27,7 @@ $(document).on("click", "p", function () {
     // With that done, add the note information to the page
     .then(function (data) {
       // var data = data[0];
-      // console.log(data);
+      console.log(data, " Line 30");
       // The title of the article
       $("#notes").append("<h2>" + data.title + "</h2>");
       // An input to enter a new title
@@ -77,35 +77,22 @@ $(document).on("click", "#savenote", function () {
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
-function deletenote(thisId) {
-  var data = { "_id": thisId};
-  $.ajax({
-    type: "DELETE",
-    url: "/headlines",
-    data:  data,
-      // title: title,
-      // body: body
-    success: function (data, textStatus) {
-      $("#" + thisId).remove();
-  }
-    
-    
-  });
-}
+
 $(document).on("click", "#deletenote", function () {
   // Run a DELETE request to change the note, using what's entered in the inputs
+  // var selected = $(this).parent();
+  // console.log(JSON.stringify($(this).attr("data-id")));
   var thisId = $(this).attr("data-id");
-  var title = $("#titleinput").val();
-  var body = $("#bodyinput").val();
-  
   $.ajax({
-    type: "DELETE",
-    url: "/headlines",
-    data:  data,
-      // title: title,
-      // body: body
-    success: function (data, textStatus) {
-      $("#notes").remove();
+    type: "PUT",
+    url: "/notes/" + thisId,
+    
+      
+    success: function (response) {
+      // selected.re();
+      $("#titleinput").val("");
+      $("#bodyinput").val("");
+      
   }
     
     
