@@ -1,9 +1,12 @@
 $.getJSON("/headlines", function (data) {
+  $("#news").empty();
   // For each one
+  $("#news").append("<tr><th>" + "News Feed" + "</th></tr>");
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#news").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].text + "<br />" + data[i].link + "</p>"
-      + "<button class='save' data-id='" + data[i]._id + "'>" + 'Save' + "</button>" + "<button class='unSave'>" + "Unsave" + "</button>" + "<hr>");
+    
+    $("#news").append("<tr><td style='text-align: center;'>" + "<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].text + "<br />" + "</p>" + "<a>" +"www.Time.com" + data[i].link + "</a>"
+      + "<br />" + "<button class='save' data-id='" + data[i]._id + "'>" + 'Save' + "</button>" + "</td></tr>");
 
   }
 });
@@ -27,7 +30,7 @@ $(document).on("click", "p", function () {
     // With that done, add the note information to the page
     .then(function (data) {
       // var data = data[0];
-      console.log(data, " Line 30");
+      // console.log(data, " Line 30");
       // The title of the article
       $("#notes").append("<h2>" + data.title + "</h2>");
       // An input to enter a new title
@@ -80,68 +83,65 @@ $(document).on("click", "#savenote", function () {
 
 $(document).on("click", "#deletenote", function () {
   // Run a DELETE request to change the note, using what's entered in the inputs
-  // var selected = $(this).parent();
-  // console.log(JSON.stringify($(this).attr("data-id")));
+  
   var thisId = $(this).attr("data-id");
   $.ajax({
     type: "PUT",
     url: "/notes/" + thisId,
-    
-      
     success: function (response) {
       // selected.re();
       $("#titleinput").val("");
       $("#bodyinput").val("");
-      
-  }
-    
-    
+    }
   });
 });
-//   $(document).on("click", ".markread", function() {
-//     var thisId = $(this).attr("data-id");
-//     $.ajax({
-//       type: "PUT",
-//       url: "/markread/" + thisId
-//     });
-//     $(this).parents("tr").remove();
-//     getRead();
-//   });
+// Save article
+  $(document).on("click", ".save", function() {
+    var thisId = $(this).attr("data-id");
+    console.log(thisId);
+    $.ajax({
+      type: "PUT",
+      url: "/saved/" + thisId
+    });
+    $(this).parents("tr").remove();
+    getRead();
+  });
 
-//   // Click event to mark a book as not read
-//   $(document).on("click", ".markunread", function() {
-//     var thisId = $(this).attr("data-id");
-//     $.ajax({
-//       type: "PUT",
-//       url: "/markunread/" + thisId
-//     });
-//     $(this).parents("tr").remove();
-//     getUnread();
-//   });
-//   // Load unread books and render them to the screen
-// function getUnread() {
-//   $("#unread").empty();
-//   $.getJSON("/unread", function(data) {
-//     for (var i = 0; i < data.length; i++) {
-//       $("#unread").prepend("<tr><td>" + data[i].title + "</td><td>" + data[i].author +
-//         "</td><td><button class='markread' data-id='" + data[i]._id + "'>Mark Read</button></td></tr>");
-//     }
-//     $("#unread").prepend("<tr><th>Title</th><th>Author</th><th>Read/Unread</th></tr>");
-//   });
-// }
+  // Click event to unsave a article
+  $(document).on("click", ".unsave", function() {
+    var thisId = $(this).attr("data-id");
+    $.ajax({
+      type: "PUT",
+      url: "/unsaved/" + thisId
+    });
+    $(this).parents("tr").remove();
+    getUnread();
+  });
+  // Load unread books and render them to the screen
+function getUnread() {
+  $("#unread").empty();
+  $.getJSON("/unsaved", function(data) {
+    for (var i = 0; i < data.length; i++) {
+      $("#unread").append("<tr><td>" + data[i].title + "</td><td>" +
+        "</td><td><button class='markread' data-id='" + data[i]._id + "'>Save</button></td></tr>");
+    }
+    // $("#unread").prepend("<tr><th>Title</th><th>Author</th><th>Read/Unread</th></tr>");
+  });
+}
 
-// // Load read books and render them to the screen
-// function getRead() {
-//   $("#read").empty();
-//   $.getJSON("/read", function(data) {
-//     for (var i = 0; i < data.length; i++) {
-//       $("#read").prepend("<tr><td>" + data[i].title + "</td><td>" + data[i].author +
-//         "</td><td><button class='markunread' data-id='" + data[i]._id + "'>Mark Unread</button></td></tr>");
-//     }
-//     $("#read").prepend("<tr><th>Title</th><th>Author</th><th>Read/Unread</th></tr>");
-//   });
-// }
-
-// // Calling our functions
-// getUnread();
-// getRead();
+// Load read books and render them to the screen
+function getRead() {
+  $("#saved").empty();
+  $.getJSON("/saved", function(data) {
+    $("#saved").append("<tr><th>" + "Saved Articles" + "</tr></th>");
+    for (var i = 0; i < data.length; i++) {
+      
+      $("#saved").append("<tr><td style='text-align: center;'>" + data[i].title + "<br />" + "<a>" +"www.Time.com" + data[i].link + "</a>" +
+         "<br />" + "<button class='unsave' data-id='" + data[i]._id + "'>Unsave</button></td></tr>" + "<hr>");
+    }
+    
+  });
+}
+getRead();
+// Calling our functions
+getUnread();

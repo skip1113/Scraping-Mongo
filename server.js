@@ -80,7 +80,7 @@ app.get("/scrape", function (req, res) {
 // Route for getting all Articles from the db
 app.get("/headlines", function (req, res) {
   // TODO: Finish the route so it grabs all of the articles
-  db.Headline.find({}).then(function (dbHeadline) {
+  db.Headline.find({ saved: false }).then(function (dbHeadline) {
     // console.log(dbHeadline);
     res.json(dbHeadline);
   })
@@ -109,7 +109,7 @@ app.get("/headlines/:id", function (req, res) {
   // and run the populate method with "note",
   // then responds with the article with the note included
 });
-// app.get("/notes/")
+// route for updating unset/clear note
 app.put("/notes/:id", function (req, res) {
   // TODO
   db.Headline.findOneAndUpdate({_id: req.params.id}, { $unset: { note: 1}}, function (err, results) {
@@ -135,9 +135,9 @@ app.post("/headlines/:id", function (req, res) {
     });
 
 });
-// Displays specified saved articles
+// Finds articles that are saved
 app.get("/saved", function (req, res) {
-  db.Headline.find({ "saved": true })
+  db.Headline.find({ saved: true })
     .populate("notes")
     .then(function (dbHeadline) {
       
@@ -145,10 +145,9 @@ app.get("/saved", function (req, res) {
     }).catch(function (err) { 
       res.json(err) });
 });
-
 // Posts saved articles 
-app.post("/saved/:id", function (req, res) {
-  db.Headline.findOneAndUpdate({ "_id": req.params.id }, { "$set": { "saved": true } })
+app.put("/saved/:id", function (req, res) {
+  db.Headline.findOneAndUpdate({ _id: req.params.id }, { $set: { saved: true } })
     .then(function (dbHeadline) {
       res.json(dbHeadline);
     }).catch(function (err) { 
@@ -156,8 +155,8 @@ app.post("/saved/:id", function (req, res) {
 })
 
 // Deletes specific articles from "Saved Articles" and puts them back on the homepage
-app.post("/delete/:id", function (req, res) {
-  db.Headline.findOneAndUpdate({ "_id": req.params.id }, { "$set": { "saved": false } })
+app.put("/unsaved/:id", function (req, res) {
+  db.Headline.findOneAndUpdate({ _id: req.params.id }, { $set: { saved: false } })
     .then(function (dbHeadline) {
       res.json(dbHeadline);
     }).catch(function (err) { 

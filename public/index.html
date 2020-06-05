@@ -13,57 +13,63 @@
 </head>
 
 <body>
-    <!-- Start to Navbar -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item1" href="#">
-                <h1>Time Scrapper</h1>
-            </a>
-
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="/scrape">
-                    Scrape Articles
-                </a>
-                <a class="navbar-item" href="/articles">
-                    Saved Articles
+    <!-- <div class="wrapper"> -->
+        <!-- Start to Navbar -->
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item1" href="#">
+                    <h1>Time Scrapper</h1>
                 </a>
 
-                <a class="navbar-item" href="/notes">
-                    Notes
-                </a>
-                <a class="navbar-item" href="/populated">
-                    Articles With Notes
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                    data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
                 </a>
             </div>
-        </div>
-    </nav>
-    <!-- End Nav -->
-    <div class="wrapper">
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="/scrape">
+                        Scrape Articles
+                    </a>
+                    <a class="navbar-item" href="/saved">
+                        Saved Articles
+                    </a>
+                    <a class="navbar-item" href="/headlines">
+                        Articles With Notes
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- End Nav -->
+        <div class="wrapper">
         <h1 id="title-main">Time Magazine Web Scrapper</h1>
         <h2 id="info">This app allows the ability to write notes and save articles!</h2>
         <br />
 
         <div id="results">
             <div id="notes"></div>
-            <table id="news">
-                <tr><th>News Feed</th></tr>
-            </table>
-
-            <table id="saved">
-                <!-- <h1>Test 2</h1> -->
-                <tr><th>Saved Articles</th></tr>
-            </table>
+            <div id="news"></div>
+            <div id="saved"></div>
+            
         </div>
-    </div>
+        </div>
+    <!-- </div> -->
+    <!-- <div>
+    <main class="Site-content">
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>Scrapping Moongoose</strong> by <a
+                        href="https://github.com/skip1113?tab=repositories">Skip Khamvongsa</a>.
+
+                </p>
+            </div>
+        </footer>
+    </main>
+    </div> -->
     <script src="app.js"></script>
 </body>
 
