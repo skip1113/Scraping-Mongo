@@ -7,7 +7,7 @@ var cheerio = require("cheerio");
 
 // Require all models as db
 var db = require("./models");
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 //Initialize Express as app
 var app = express();
