@@ -21,9 +21,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Headline";
-
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/Headline";
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Headline", { useNewUrlParser: true });
+// mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // mongoose.connect("mongodb://localhost/Headline", { useNewUrlParser: true });
 console.log("Mongoose connection");
 //Routes
