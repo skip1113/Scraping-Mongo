@@ -16,7 +16,7 @@ Click the link to deployed Heroku and Click Scrape Article.
     * mongod
     * node server.js
 * Open your browser and search localhost:/3000
-* Click that Scrap button
+* Click that scrape button
 
 ![](/public/home-img.png)
 
