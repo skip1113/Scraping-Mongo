@@ -2,7 +2,7 @@ $.getJSON("/headlines", function (data) {
   $("#news").empty();
   // For each one
   $("#news").append("<tr><th>" + "News Feed" + "</th></tr>");
-  for (var i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     // Display the apropos information on the page
     
     $("#news").append("<tr><td style='text-align: center;'>" + "<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].text + "<br />" + "</p>" + "<a>" +"www.Time.com" + data[i].link + "</a>"
@@ -12,7 +12,7 @@ $.getJSON("/headlines", function (data) {
 });
 // $(document).on("click", "#deletenote", deletenote);
 // $(document).on("click", ".save", function () {
-//   var thisId = $(this).attr("data-id");
+//   let thisId = $(this).attr("data-id");
   
 // })
 $(document).on("click", "p", function () {
@@ -20,7 +20,7 @@ $(document).on("click", "p", function () {
   $("#notes").empty();
   // Save the id from the p tag
 
-  var thisId = $(this).attr("data-id");
+  let thisId = $(this).attr("data-id");
   console.log("thisId" + thisId);
   // Now make an ajax call for the Article
   $.ajax({
@@ -29,7 +29,7 @@ $(document).on("click", "p", function () {
   })
     // With that done, add the note information to the page
     .then(function (data) {
-      // var data = data[0];
+      // let data = data[0];
       // console.log(data, " Line 30");
       // The title of the article
       $("#notes").append("<h2>" + data.title + "</h2>");
@@ -52,9 +52,9 @@ $(document).on("click", "p", function () {
 });
 $(document).on("click", "#savenote", function () {
   // Grab the id associated with the article from the submit button
-  var thisId = $(this).attr("data-id");
-  var title = $("#titleinput").val();
-  var body = $("#bodyinput").val();
+  let thisId = $(this).attr("data-id");
+  let title = $("#titleinput").val();
+  let body = $("#bodyinput").val();
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
@@ -84,7 +84,7 @@ $(document).on("click", "#savenote", function () {
 $(document).on("click", "#deletenote", function () {
   // Run a DELETE request to change the note, using what's entered in the inputs
   
-  var thisId = $(this).attr("data-id");
+  let thisId = $(this).attr("data-id");
   $.ajax({
     type: "PUT",
     url: "/notes/" + thisId,
@@ -97,7 +97,7 @@ $(document).on("click", "#deletenote", function () {
 });
 // Save article
   $(document).on("click", ".save", function() {
-    var thisId = $(this).attr("data-id");
+    let thisId = $(this).attr("data-id");
     console.log(thisId);
     $.ajax({
       type: "PUT",
@@ -109,7 +109,7 @@ $(document).on("click", "#deletenote", function () {
 
   // Click event to unsave a article
   $(document).on("click", ".unsave", function() {
-    var thisId = $(this).attr("data-id");
+    let thisId = $(this).attr("data-id");
     $.ajax({
       type: "PUT",
       url: "/unsaved/" + thisId
@@ -121,7 +121,7 @@ $(document).on("click", "#deletenote", function () {
 function getUnread() {
   $("#unread").empty();
   $.getJSON("/unsaved", function(data) {
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       $("#unread").append("<tr><td>" + data[i].title + "</td><td>" +
         "</td><td><button class='markread' data-id='" + data[i]._id + "'>Save</button></td></tr>");
     }
@@ -134,7 +134,7 @@ function getRead() {
   $("#saved").empty();
   $.getJSON("/saved", function(data) {
     $("#saved").append("<tr><th>" + "Saved Articles" + "</tr></th>");
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       
       $("#saved").append("<tr><td style='text-align: center;'>" + data[i].title + "<br />" + "<a>" +"www.Time.com" + data[i].link + "</a>" +
          "<br />" + "<button class='unsave' data-id='" + data[i]._id + "'>Unsave</button></td></tr>" + "<hr>");

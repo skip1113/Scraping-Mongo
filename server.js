@@ -1,16 +1,16 @@
-var express = require("express");
-var logger = require("morgan");
-var mongoose = require("mongoose");
+const express = require("express");
+const logger = require("morgan");
+const mongoose = require("mongoose");
 //Tools for scrapping
-var axios = require("axios");
-var cheerio = require("cheerio");
+const axios = require("axios");
+const cheerio = require("cheerio");
 
 // Require all models as db
-var db = require("./models");
-var PORT = process.env.PORT || 3000;
+const db = require("./models");
+const PORT = process.env.PORT || 3000;
 
 //Initialize Express as app
-var app = express();
+const app = express();
 
 //Configure Middleware
 //Use Morgan logger for loggin requests
@@ -40,11 +40,11 @@ app.get("/scrape", function (req, res) {
   // First, we grab the body of the html with axios
   axios.get("https://time.com/").then(function (response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
+    let $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
     $("section.homepage-module").each(function (i, element) {
-      var result = {};
+      let result = {};
 
       result.title = $(this)
         .find("h2.title")
