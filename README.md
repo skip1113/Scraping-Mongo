@@ -18,6 +18,8 @@ Click the link to deployed Heroku and Click Scrape Article.
 * Open your browser and search localhost:/3000
 * Click that Scrap button
 
+![](/public/home-img.png)
+
 ## Organization 
 * Server.js file
     * Require tools
